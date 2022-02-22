@@ -28,7 +28,7 @@ namespace ProgramaDeValores.ConsoleApp
 
                 Menu(arrayDeNumeros);
                 string inputOpcao = Console.ReadLine();
-                OpcoesMenu(inputOpcao);
+                OpcoesMenu(inputOpcao, arrayDeNumeros);
 
                 Console.WriteLine("");
 
@@ -156,7 +156,7 @@ namespace ProgramaDeValores.ConsoleApp
         }
 
         // Continuar aqui.
-        static void OpcoesMenu(string opcaoEscolhida)
+        static int[] OpcoesMenu(string opcaoEscolhida, int[] arrayNumeros) //WIP
         {
             switch (opcaoEscolhida)
             {
@@ -167,7 +167,7 @@ namespace ProgramaDeValores.ConsoleApp
                     Console.WriteLine("");
                     break;
                 case "3":
-                    Console.WriteLine("");
+                    MediaValores(arrayNumeros);
                     break;
                 case "4":
                     Console.WriteLine("");
@@ -182,6 +182,39 @@ namespace ProgramaDeValores.ConsoleApp
                     Console.WriteLine("");
                     break;
             }
+
+            return arrayNumeros;
+        }
+        static int MaiorValor(int[] arrayNumeros) //WIP
+        {
+            int maiorValor = 0;
+
+            return maiorValor;
+        }
+
+        static int MenorValor(int[] arrayNumeros) //WIP
+        {
+            int menorValor = 0;
+
+            return menorValor;
+        }
+
+        static int MediaValores(int[] arrayNumeros) 
+        {
+            int mediaValores = 0;
+            int somaValores = 0;
+
+            for (int i = 0; i < arrayNumeros.Length; i++)
+            {
+              somaValores = somaValores + arrayNumeros[i];
+            }
+
+            mediaValores = somaValores / 10;
+
+            Console.WriteLine("");
+            Console.WriteLine("A media dos valores eh de: {0}.", mediaValores);
+
+            return mediaValores;
         }
         #endregion
     }
