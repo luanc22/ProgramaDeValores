@@ -182,15 +182,31 @@ namespace ProgramaDeValores.ConsoleApp
                     case "1":
                         int maiorNumero = 1;
                         MaiorValor(arrayNumeros, ref maiorNumero);
+                        Console.WriteLine("");
+                        Console.Write("O maior dos valores na Array eh: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(maiorNumero + ".");
+                        Console.ResetColor();
                         opcaoValida = true;
                         break;
                     case "2":
                         int menorNumero;
                         MenorValor(arrayNumeros, out menorNumero);
+                        Console.WriteLine("");
+                        Console.Write("O menor dos valores na Array eh: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(menorNumero + ".");
+                        Console.ResetColor();
                         opcaoValida = true;
                         break;
                     case "3":
-                        MediaValores(arrayNumeros);
+                        int mediaValores;
+                        MediaValores(arrayNumeros, out mediaValores);
+                        Console.WriteLine("");
+                        Console.Write("A media dos valores eh de: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(mediaValores + ".");
+                        Console.ResetColor();
                         opcaoValida = true;
                         break;
                     case "4":
@@ -236,12 +252,6 @@ namespace ProgramaDeValores.ConsoleApp
 
             maiorValor = arrayNumeros[9];
 
-            Console.WriteLine("");
-            Console.Write("O maior dos valores na Array eh: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(maiorValor + ".");
-            Console.ResetColor();
-
             return maiorValor;
         }
 
@@ -251,18 +261,11 @@ namespace ProgramaDeValores.ConsoleApp
 
             menorValor = arrayNumeros[0];
 
-            Console.WriteLine("");
-            Console.Write("O menor dos valores na Array eh: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(menorValor + ".");
-            Console.ResetColor();
-
             return menorValor;
         }
 
-        static int MediaValores(int[] arrayNumeros)
+        static int MediaValores(int[] arrayNumeros, out int mediaValores)
         {
-            int mediaValores = 0;
             int somaValores = 0;
 
             for (int i = 0; i < arrayNumeros.Length; i++)
@@ -271,12 +274,6 @@ namespace ProgramaDeValores.ConsoleApp
             }
 
             mediaValores = somaValores / 10;
-
-            Console.WriteLine("");
-            Console.Write("A media dos valores eh de: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(mediaValores + ".");
-            Console.ResetColor();
 
             return mediaValores;
         }
