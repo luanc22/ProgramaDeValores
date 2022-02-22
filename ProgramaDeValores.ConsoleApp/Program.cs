@@ -71,13 +71,13 @@ namespace ProgramaDeValores.ConsoleApp
 
             Console.WriteLine("Bem vindo ao menu da aplicacao, escolha uma opcao abaixo: ");
             Console.WriteLine();
-            Console.WriteLine("1 - Encontrar o Maior Valor da Sequencia.");
-            Console.WriteLine("2 - Encontrar o Menor Valor da Sequencia.");
-            Console.WriteLine("3 - Encontrar o Valor Medio da Sequencia.");
-            Console.WriteLine("4 - Encontrar os 3 Maiores Valores da Sequencia.");
-            Console.WriteLine("5 - Encontrar os Valores Negativos da Sequencia.");
-            Console.WriteLine("6 - Mostrar os valores da Sequencia.");
-            Console.WriteLine("7 - Remover um item da sequencia.");
+            Console.WriteLine(" 1 - Encontrar o Maior Valor da Sequencia.");
+            Console.WriteLine(" 2 - Encontrar o Menor Valor da Sequencia.");
+            Console.WriteLine(" 3 - Encontrar o Valor Medio da Sequencia.");
+            Console.WriteLine(" 4 - Encontrar os 3 Maiores Valores da Sequencia.");
+            Console.WriteLine(" 5 - Encontrar os Valores Negativos da Sequencia.");
+            Console.WriteLine(" 6 - Mostrar os valores da Sequencia.");
+            Console.WriteLine(" 7 - Remover um item da sequencia.");
             Console.WriteLine("");
             Console.Write("Opcao escolhida: ");
         }
@@ -180,41 +180,32 @@ namespace ProgramaDeValores.ConsoleApp
                 switch (opcaoSelecionada)
                 {
                     case "1":
-                        int maiorNumero = 1;
+                        int maiorNumero = 0;
                         MaiorValor(arrayNumeros, ref maiorNumero);
-                        Console.WriteLine("");
-                        Console.Write("O maior dos valores na Array eh: ");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(maiorNumero + ".");
-                        Console.ResetColor();
+                        Resultado(opcaoSelecionada, arrayNumeros, maiorNumero);
                         opcaoValida = true;
                         break;
                     case "2":
                         int menorNumero;
                         MenorValor(arrayNumeros, out menorNumero);
-                        Console.WriteLine("");
-                        Console.Write("O menor dos valores na Array eh: ");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(menorNumero + ".");
-                        Console.ResetColor();
+                        Resultado(opcaoSelecionada, arrayNumeros, menorNumero);
                         opcaoValida = true;
                         break;
                     case "3":
-                        int mediaValores;
-                        MediaValores(arrayNumeros, out mediaValores);
-                        Console.WriteLine("");
-                        Console.Write("A media dos valores eh de: ");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(mediaValores + ".");
-                        Console.ResetColor();
+                        int mediaValores = 0;
+                        mediaValores = MediaValores(arrayNumeros, mediaValores);
+                        Resultado(opcaoSelecionada, arrayNumeros, mediaValores);
                         opcaoValida = true;
                         break;
                     case "4":
-                        TresMaioresValores(arrayNumeros);
+                        int[] tresMaiores = new int[3];
+                        TresMaioresValores(arrayNumeros, tresMaiores);
+                        ResultadoComArray(opcaoSelecionada, arrayNumeros, tresMaiores);
                         opcaoValida = true;
                         break;
                     case "5":
-                        ValoresNegativos(arrayNumeros);
+                        int[] valoresNegativos = ValoresNegativos(arrayNumeros);
+                        ResultadoComArray(opcaoSelecionada, arrayNumeros, valoresNegativos);
                         opcaoValida = true;
                         break;
                     case "6":
@@ -222,7 +213,8 @@ namespace ProgramaDeValores.ConsoleApp
                         opcaoValida = true;
                         break;
                     case "7":
-                        RemoverValor(arrayNumeros);
+                        int[] novaArray = RemoverValor(arrayNumeros);
+                        ResultadoComArray(opcaoSelecionada, arrayNumeros, novaArray);
                         opcaoValida = true;
                         break;
                     default:
@@ -250,7 +242,7 @@ namespace ProgramaDeValores.ConsoleApp
 
             Array.Sort(arrayNumeros);
 
-            maiorValor = arrayNumeros[9];
+            maiorValor = arrayNumeros[arrayNumeros.Length - 1];
 
             return maiorValor;
         }
@@ -264,7 +256,7 @@ namespace ProgramaDeValores.ConsoleApp
             return menorValor;
         }
 
-        static int MediaValores(int[] arrayNumeros, out int mediaValores)
+        static int MediaValores(int[] arrayNumeros, int mediaValores)
         {
             int somaValores = 0;
 
@@ -278,9 +270,8 @@ namespace ProgramaDeValores.ConsoleApp
             return mediaValores;
         }
 
-        static int[] TresMaioresValores(int[] arrayNumeros)
+        static int[] TresMaioresValores(int[] arrayNumeros, int[] tresMaiores)
         {
-            int[] tresMaiores = new int[3];
             int j = arrayNumeros.Length - 3;
 
             Array.Sort(arrayNumeros);
@@ -290,23 +281,6 @@ namespace ProgramaDeValores.ConsoleApp
                 tresMaiores[i] = arrayNumeros[j];
                 j++;
             }
-
-            Console.WriteLine("");
-            Console.Write("Os tres maiores dos valores sao de: ");
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int i = 0; i < tresMaiores.Length; i++)
-            {
-                if (i == tresMaiores.Length - 1)
-                {
-                    Console.Write(tresMaiores[i] + ".");
-                }
-                else
-                {
-                    Console.Write(tresMaiores[i] + ", ");
-                }
-            }
-            Console.ResetColor();
 
             return tresMaiores;
         }
@@ -335,45 +309,7 @@ namespace ProgramaDeValores.ConsoleApp
                 }
             }
 
-            Console.WriteLine("");
-            Console.Write("Os valores negativos da array sao: ");
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int i = 0; i < valoresNegativos.Length; i++)
-            {
-                if (i == valoresNegativos.Length - 1)
-                {
-                    Console.Write(valoresNegativos[i] + ".");
-                }
-                else
-                {
-                    Console.Write(valoresNegativos[i] + ", ");
-                }
-            }
-            Console.ResetColor();
-
             return valoresNegativos;
-        }
-
-        static void MostrarValores(int[] arrayNumeros)
-        {
-            Console.WriteLine("");
-            Console.WriteLine("Posicoes e numeros na Array: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int i = 0; i < arrayNumeros.Length; i++)
-            {
-                if (i == 9)
-                {
-                    Console.Write(" [{0}] = {1}.", i, arrayNumeros[i]);
-                    Console.WriteLine("");
-                }
-                else
-                {
-                    Console.Write(" [{0}] = {1};", i, arrayNumeros[i]);
-                    Console.WriteLine("");
-                }
-            }
-            Console.ResetColor();
         }
 
         static int[] RemoverValor(int[] arrayNumeros)
@@ -462,23 +398,6 @@ namespace ProgramaDeValores.ConsoleApp
                 }
             }
 
-            Console.WriteLine("");
-            Console.Write("Sua array ficou: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            for (int i = 0; i < novaArray.Length; i++)
-            {
-                if (i == novaArray.Length - 1)
-                {
-                    Console.Write(novaArray[i] + ".");
-                }
-                else
-                {
-                    Console.Write(novaArray[i] + ", ");
-                }
-            }
-            Console.ResetColor();
-            Console.ReadLine();
-
             return novaArray;
         }
 
@@ -522,6 +441,133 @@ namespace ProgramaDeValores.ConsoleApp
                 }
             }
             return fecharApp;
+        }
+
+        static void Resultado(string opcaoEscolhida, int[] arrayNumeros, int Resultado)
+        {
+            switch (opcaoEscolhida)
+            {
+                case "1":
+                    Console.WriteLine("");
+                    Console.Write("O maior dos valores na Array eh: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(Resultado + ".");
+                    Console.ResetColor();
+                    break;
+                case "2":
+                    Console.WriteLine("");
+                    Console.Write("O menor dos valores na Array eh: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(Resultado + ".");
+                    Console.ResetColor();
+                    break;
+                case "3":
+                    Console.WriteLine("");
+                    Console.Write("A media dos valores eh de: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(Resultado + ".");
+                    Console.ResetColor();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("");
+                    Console.WriteLine("ERRO!");
+                    Console.WriteLine("Opcao invalida! Por favor, selecione uma opcao valida.");
+                    Console.ResetColor();
+                    Console.WriteLine("");
+                    Console.WriteLine("Pressione ENTER e tente novamente.");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Cabecalho();
+                    Menu(arrayNumeros);
+                    break;
+            }
+            
+        }
+
+        static void ResultadoComArray(string opcaoEscolhida, int[] arrayNumeros, int[] resultadoArray)
+        {
+            switch (opcaoEscolhida)
+            {
+                case "4":
+                    Console.WriteLine("");
+                    Console.Write("Os tres maiores dos valores sao de: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    for (int i = 0; i < resultadoArray.Length; i++)
+                    {
+                        if (i == resultadoArray.Length - 1)
+                        {
+                            Console.Write(resultadoArray[i] + ".");
+                        }
+                        else
+                        {
+                            Console.Write(resultadoArray[i] + ", ");
+                        }
+                    }
+                    Console.ResetColor();
+                    Console.WriteLine("");
+                    break;
+                case "5":
+                    Console.WriteLine("");
+                    Console.Write("Os valores negativos da array sao: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    for (int i = 0; i < resultadoArray.Length; i++)
+                    {
+                        if (i == resultadoArray.Length - 1)
+                        {
+                            Console.Write(resultadoArray[i] + ".");
+                        }
+                        else
+                        {
+                            Console.Write(resultadoArray[i] + ", ");
+                        }
+                    }
+                    Console.ResetColor();
+                    Console.WriteLine("");
+                    break;
+                case "7":
+                    Console.WriteLine("");
+                    Console.Write("Sua array ficou: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    for (int i = 0; i < resultadoArray.Length; i++)
+                    {
+                        if (i == resultadoArray.Length - 1)
+                        {
+                            Console.Write(resultadoArray[i] + ".");
+                        }
+                        else
+                        {
+                            Console.Write(resultadoArray[i] + ", ");
+                        }
+                    }
+                    Console.ResetColor();
+                    Console.ReadLine();
+                    break;
+            }
+        }
+        
+        static void MostrarValores(int[] arrayNumeros)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Posicoes e numeros na Array: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < arrayNumeros.Length; i++)
+            {
+                if (i == 9)
+                {
+                    Console.Write(" [{0}] = {1}.", i, arrayNumeros[i]);
+                    Console.WriteLine("");
+                }
+                else
+                {
+                    Console.Write(" [{0}] = {1};", i, arrayNumeros[i]);
+                    Console.WriteLine("");
+                }
+            }
+
+            Console.ResetColor();
+
+            Console.WriteLine("");
         }
         #endregion
     }
